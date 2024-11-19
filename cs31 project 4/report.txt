@@ -1,0 +1,94 @@
+Coco Li 
+UID: 905 917 242
+
+
+Some of the obstacles I overcame when completing this project were related to the shiftLeft function. I had trouble with shifting the elements x amount of times. I had to write a test case on paper and fully understand the function before I realized how I would be able to access and move an element. I also had a problem where I was receiving garbage in my changed array. Another obstacle I had was regarding countPointingFloatValues. I wasn’t sure how I would be able to handle the test case with multiple decimal point values. However, I remembered that I could declare and initialize a local variable to help me with this. My program passed all of the test cases I had.
+
+Test Cases: 
+
+string data[5] = {"mamaBbcca", "mamaBbcca", "12,", "98.76","tyrion",};
+string folks[8] = {"samwell", "jon", "margaery", "daenerys", "tyrion", "sansa", "magdalena", "jon"};
+string bubble[6] = {"1.23", "1.039", "hello", "nope","bubblegum","."};
+string stars[10] = {"1.33@", "1.039", "SPACESHIP", "3.14159","what","02.3", "89", "what"};
+string hydrate[8] = {"2.22", "2.22", "2.22", "2.22","2.22","2.22", "2.22", "2..22"};
+string slay[6] = {"I,", "AM", "SUCH", "A","SLAY","!"};
+string onlyLetters[6] = {"UP", "What ", "pop", "goes","THe","WEASEL!"};
+string a[6] = { "123", "456", "789", "gamma", "beta", "delta" };
+string bose[1] = {"1.3"};
+string caps[5] = {"helP","tRain"};
+    
+
+// all locateMaximum test cases are ensuring that it returns the right maximum index from the amount of elements it is looking at in the array
+    
+    assert(locateMaximum(data,5) == 4);
+    assert(locateMaximum(folks,7) == 4);
+    assert(locateMaximum(bubble,6) == 3); 
+    assert(locateMaximum(stars,8) == 4);
+    assert(locateMaximum(hydrate,8) == 0);
+    assert(locateMaximum(slay,6) == 2);
+    assert(locateMaximum(onlyLetters,6) == 2);
+    assert(locateMaximum(bose,1) == 0);
+    assert(locateMaximum(caps,1) == 0);
+    assert(locateMaximum(caps,2) == 1);
+    assert(locateMaximum(a,3) == 2);
+    
+    // for one string
+    assert(oneFloat("hello") == 0);
+    assert(oneFloat("12") == 1);
+    assert(oneFloat("12.1") == 1);
+    assert(oneFloat("12$") == 0);
+    assert(oneFloat("18..09") == 0);
+    assert(oneFloat(".") == 0);
+    
+     
+    assert(countFloatingPointValues(data,5) == 1); // making sure it returns the right amount of floats in the whole array
+    assert(countFloatingPointValues(folks,8) == 0);
+    assert(countFloatingPointValues(bubble,1) == 1); // making sure it does not count any other float in the array because it is only asking for one element in the array 
+    assert(countFloatingPointValues(stars,8) == 4); // making sure it returns the right amount of floats in the whole array
+    assert(countFloatingPointValues(a, 3) == 3 ); // making sure it returns the right amount of floats in the whole array
+    assert(countFloatingPointValues(bose,1) == 1); // making sure it returns the right amount of floats in the whole array
+    assert(countFloatingPointValues(hydrate,8) == 7); // making sure it returns the right amount of floats in the whole array
+    assert(countFloatingPointValues(slay,6) == 0);   // test case makes sure it does not count special characters as a float
+    assert(countFloatingPointValues(onlyLetters,6) == 0);  // making sure it doesn't count words as a float
+    
+    
+    // for one string
+    assert(oneNoCapital("Hello") == false);
+    assert(oneNoCapital("tRain") == false);
+    assert(oneNoCapital("hello") == true);
+    assert(oneNoCapital("!") == true);
+    
+
+
+    // all hasNoCapital test are checking to making sure there are no capitals for the amount of elements it is looking at in the array; if there is a capital return false
+    // also makes sure that if there is a capital in the middle of one string it returns false 
+
+    assert(hasNoCapitals(data, 5) == false);
+    assert(hasNoCapitals(folks, 8) == true);
+    assert(hasNoCapitals(bubble, 6) == true);
+    assert(hasNoCapitals(stars, 8) == false);
+    assert(hasNoCapitals(hydrate, 8) == true);
+    assert(hasNoCapitals(slay, 6) == false);
+    assert(hasNoCapitals(onlyLetters, 6) == false);
+    assert(hasNoCapitals(a, 6) == true );
+    assert(hasNoCapitals(bose,1) == true);
+    assert(hasNoCapitals(caps,2) == false);
+ 
+
+
+// making sure array shift correctly and returns the right amount of placeholders
+
+    assert(shiftLeft(data,5,2,"foo") == 2);   
+    assert(shiftLeft(data,3,2,"foo") == 2);
+    assert(shiftLeft(data, -5, 10, "foobar") == -1);
+    assert(shiftLeft(data, -5, 10, "foobar") == -1);
+    assert(shiftLeft(data, 5, -5, "foobar") == -1);
+    assert(shiftLeft(folks, 1, 2, "foobar") == 1);
+    assert(shiftLeft(bubble, 6, 3, "foobar") == 3);
+    assert(shiftLeft(bubble, 3, 6, "foobar") == 3);
+    assert(shiftLeft(bubble, 6, 6, "foobar") == 6);
+    assert(shiftLeft(bose, 1, 2, "hello") == 1);
+    assert(shiftLeft(onlyLetters, 6, 8, "hello") == 6);
+    assert(shiftLeft(a, 0, 6, "hello") == -1);
+    assert(shiftLeft(caps, 5, -1, "hello") == -1);
+    assert(shiftLeft(onlyLetters, 5, 8, "hello") == 5);

@@ -1,0 +1,43 @@
+
+Name: Coco Li
+UCLA ID: 905917242
+
+
+Step 5:
+
+
+From step 5, the integers I used to run the code to produce nonsensical results were 538 for the first electoral college question, 23 for the number of electors who voted for the Republican candidate, and 60 for the number of electors who voted for the Democratic candidate. I also used numbers such as 200, 45, and 31. 
+
+
+Logic Error :
+
+
+A logical error I introduced in the logic_error.cpp was 
+
+
+double pctRepub = ( 100.0 - republicanVotes ) / totalVoters;
+double pctDemoc = ( 100.0 - democraticVotes ) / totalVoters;
+
+
+instead of 
+
+
+double pctRepub = ( 100.0 * republicanVotes ) / totalVoters;
+double pctDemoc = ( 100.0 *  democraticVotes ) / totalVoters;. 
+ 
+By creating this error, the program produced -0.2% electors for the Republican party candidate and -0.4% electors for the Democratic party candidate rather than 43.1% electors for the Republican party candidate and 56.9% electors for the Democratic party candidate. The error also mentions how the Republican candidate won rather than the Democratic candidate. The integers that were used when running this program were based on the 2020 US presidential election. 
+
+
+Compile Error:
+
+
+One compiler error I introduced was removing the curly brackets by the end of the last line of code. Another compiler error I introduced was removing a semi colon in the last line cout << endl. 
+
+
+My Errors: 
+
+
+cout << pctRepub << "% of the " << totalVoters << " electors voted for the Republican party candidate." << endl;     cout << pctDemoc << "% of the " << totalVoters << " electors voted for the Democratic party candidate." << endl;     cout << endl 
+
+
+ return(0);

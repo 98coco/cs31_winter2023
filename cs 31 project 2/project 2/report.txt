@@ -1,0 +1,7 @@
+Coco Li
+UID: 905917242
+Discussion 1F
+CS 31 Project 2
+
+
+One obstacle I faced when completing this assignment was figuring out how to format my if-else statements (e.g., in what order I should put the code and whether my expressions were syntactically correct). Furthermore, learning the difference between cin.clear and cin.ignore and when to use them was challenging, but I have gained a better understanding of both through the project. Another obstacle I faced when completing this assignment was not hardcoding. Initially, I placed the actual tax in the code without context. However, I realized that one of the best ways to prevent hardcoding is by creating a variable and initializing it, especially when working with changing numerical values. My program passed all my invalid and valid test cases.

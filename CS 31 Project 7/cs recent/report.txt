@@ -1,0 +1,82 @@
+﻿Name: Coco Li
+UID: 905 917 242
+
+
+One new class method I created is in the class VacationAccount. This method is called redeemVacationAccount. This function allows employees who can donate to redeem the hours they earned for vacation days. 
+
+
+One new class I created was DonationDates. DonationDates is a class that ensures that employees who can donate blood can’t donate blood more than once a day. By doing this, employees would not abuse the reward system. In this class, I implemented the class methods getID, setEmployeeID,  firstDonationDate, and canDonateAgain. firstDonationDate ensures that the date the donor is passing in is valid and sets it to their account for future uses. canDonateAgain allows the volunteer to check if they canDonateAgain. 
+
+
+Another class I created was VolunteerBloodDrive. This class allows those who can’t donate blood to still be able to earn vacation days. Instead of donating blood, these people will volunteer at blood drives to get hours for vacation days. Like donors, they can earn max 4 hours added to their account for each day they volunteer.  Class methods I included in this class are getVolunteerID, getVolunteeredHours, setVolunteerID, setVolunteeredHours, canVolunteer, addVolunteerHours, and redeemVolunteerHours. addVolunteerHours add the hours passed in if the date of volunteering is valid. redeemVolunteerHours allow employees who volunteer to redeem their volunteer hours in exchange for vacation days. 
+
+
+I demonstrated constructor overload and constructor delegation in the class VolunteerBloodDrive. If the volunteer did not enter the hours they volunteered, I just passed in 0, signifying that they have not volunteered yet. 
+
+
+I made the two new classes I created friends of BloodDonation. This is so that employees can easily access their employee IDs when checking them through these new classes.
+
+
+Prroject 7 test cases:
+
+
+    BloodDonation donor2(889543, 55, 109.50);
+    BloodDonation donor3(234323,20, 100.00);
+    BloodDonation donor5(232,15,120.9);
+    BloodDonation donor6(789233, 18, 100.00);
+  
+    VacationAccount account2(889543);
+    
+    DonationDates EmployeeDonor1(889543);
+    
+    assert(EmployeeDonor1.getID() == 889543);
+    assert(EmployeeDonor1.firstDonationDate(3,28,2023, donor2) == true); //checking if it gives a valid date
+    assert(EmployeeDonor1.canDonateAgain(3, 28, 2023, donor2) == false); //can't donate on the same day
+    assert(EmployeeDonor1.canDonateAgain(4,5,2023,donor2) == true);
+    assert(EmployeeDonor1.canDonateAgain(3, 27, 2023, donor2) == false); //checking to see whether or not dates that are passed is in chronological order.
+    
+    //adding balance --> testing redeemVacationAccount method
+    assert(account2.addVacationToAccount(donor2) == true );
+    assert(account2.getBalance( ) == 4.000000 );
+    assert(account2.addVacationToAccount(donor2) == true ); //donor donated again
+    assert(account2.getBalance( ) == 8.000000 ); //add 4 to the balance
+    assert(account2.addVacationToAccount(donor2) == true ); //donor donated again
+    assert(account2.getBalance( ) == 12.000000 );
+    
+    assert(account2.redeemVacationAccount(12, donor2) == true);
+    assert(account2.getBalance() == 0);
+    
+    VolunteerBloodDrive volunteer1(889543, 4);
+    VolunteerBloodDrive volunteer2(567832);
+    VolunteerBloodDrive volunteer3(1245);
+    VolunteerBloodDrive volunteer4(329420,2);
+     
+    assert(volunteer1.canVolunteer(12, 4, 2023, donor2) == false); //donor2 can donate blood so they can't be a volunteer
+    assert(volunteer2.canVolunteer(2, 3, 2025, donor5) == false); //invalid employeeID -- can't donate
+    assert(volunteer2.canVolunteer(6, 7, 2024, donor3) == true); //can volunteer because they can't donate blood
+    assert(volunteer3.canVolunteer(10,18,2023, donor6) == false); //invalid volunteerID
+    
+    assert(volunteer1.getVolunteerID() == 889543);
+    assert(volunteer2.getVolunteeredHours() == 0); //checking to see if constructor delegation worked
+    
+    assert(volunteer2.addVolunteerHours(3, 29, 2023, 4, donor3) == true);
+    assert(volunteer2.addVolunteerHours(4, 5, 2023, 5, donor3) == false); //can't volunteer for more than 4 hours
+    assert(volunteer2.addVolunteerHours(3, 29, 2023, 1, donor3) == false); //can't volunteer on the same day again
+    assert(volunteer2.addVolunteerHours(2, 28, 2023, 3, donor3) == false); //volunteer days have to be in chronological order
+    assert(volunteer2.addVolunteerHours(5, 6, 2024, 3, donor3) == true); //can volunteer
+    
+    assert(volunteer2.redeemVolunteerHours(400, donor3) == false); //volunteer does not have enough points in their account
+    assert(volunteer2.getVolunteeredHours() == 7);
+    assert(volunteer2.redeemVolunteerHours(7, donor3) == true); //volunteer has enough points
+    assert(volunteer2.getVolunteeredHours() == 0);
+    
+    assert(volunteer4.canVolunteer(6, 5, 2023, donor6) == true);
+    assert(volunteer4.getVolunteerID() == 329420);
+    assert(volunteer4.addVolunteerHours(7, 28, 2025, 4, donor6) == true);
+    assert(volunteer4.getVolunteeredHours() == 6);
+    assert(volunteer4.addVolunteerHours(7, 24, 2025, 2, donor6) == false);
+    assert(volunteer4.addVolunteerHours(7, 30, 2025, 4, donor6) == true);
+    assert(volunteer4.addVolunteerHours(7, 30, 2025, -1, donor6) == false); //invalid volunteer hour
+    assert(volunteer4.addVolunteerHours(8, 25, 2025, 3, donor6) == true);
+    assert(volunteer4.redeemVolunteerHours(13, donor6) == true);
+    assert(volunteer4.getVolunteeredHours() == 0); //because they redeemed their volunteer points for vacation
